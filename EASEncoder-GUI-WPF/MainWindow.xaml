@@ -14,10 +14,10 @@
         Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="EAS Encoder" Height="720" Width="946.4" MinWidth="920" MinHeight="720">
+        Title="EAS Encoder" Height="688" Width="926" MinWidth="920" MinHeight="720">
     <Grid>
         <!-- Main window -->
-        <DockPanel VerticalAlignment="Bottom">
+        <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,16,8" Visibility="Collapsed">
                     <Label x:Name="label" Content="Dark mode" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,1,8,0"/>
@@ -56,9 +56,9 @@
             </StackPanel>
             <materialDesign:Snackbar x:Name="main_snackbar" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch"/>
         </DockPanel>
-        <Grid Margin="4,70,-1.4,0" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <Grid Margin="4,75,0,0" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
             <StackPanel x:Name="sPanel" Orientation="Horizontal" Width="auto">
-                <StackPanel Orientation="Vertical" Width="auto" Margin="8,0,0,0" VerticalAlignment="Stretch" >
+                <StackPanel Orientation="Vertical" Width="475" Margin="8,0,0,48" VerticalAlignment="Stretch" >
                     <GroupBox x:Name="groupBox_alertIdentifier" Header="Alert Identifier Configuration" HorizontalAlignment="Stretch" Height="auto" Margin="0" VerticalAlignment="Top" Width="auto" Style="{DynamicResource MaterialDesignCardGroupBox}">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
@@ -68,7 +68,7 @@
                             <ComboBox x:Name="comboCode" Style="{StaticResource MaterialDesignFilledComboBox}" HorizontalAlignment="Left" Margin="0,12,0,0" VerticalAlignment="Top" Width="283" materialDesign:HintAssist.Hint="Alert Code" RenderTransformOrigin="0.508,0.436" SelectionChanged="comboCode_SelectionChanged" />
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox x:Name="groupBox_alertLocationAndTime" Header="Alert Location(s) &amp; Time" Margin="0,8,0,0" Width="506" Style="{DynamicResource MaterialDesignCardGroupBox}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" Height="397">
+                    <GroupBox x:Name="groupBox_alertLocationAndTime" Header="Alert Location(s) &amp; Time" Margin="0,8,0,0" Style="{DynamicResource MaterialDesignCardGroupBox}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" Height="397">
                         <StackPanel Orientation="Vertical" CanVerticallyScroll="True" VerticalAlignment="Stretch">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="auto" Margin="0,4,0,0" VerticalAlignment="Top" Width="auto" RenderTransformOrigin="0.495,0.563">
                                 <Label Content="Alert starts:" Margin="0,0,8,0" Width="90"  HorizontalContentAlignment="Right"/>
@@ -111,7 +111,7 @@
                                                                 <MenuItem x:Name="addItemDialog_menu_checkBox_keepDialogOpen" Header="Keep dialog open" IsCheckable="True"/>
                                                                 <Separator/>
                                                                 <Button x:Name="addItemDialog_menuButton_addWholeState" Content="Add the whole state" Click="addItemDialog_menuButton_addWholeState_Click"/>
-                                                                <Button x:Name="addItemDialog_menuButton_addTheWorld" Content="Add the world! (Experimental)" Click="addItemDialog_menuButton_addTheWorld_Click"/>
+                                                                <Button x:Name="addItemDialog_menuButton_addTheWorld" Content="Add the world!" Click="addItemDialog_menuButton_addTheWorld_Click"/>
                                                             </StackPanel>
                                                         </materialDesign:PopupBox>
                                                         <Button x:Name="button_dialogCancel" Content="CANCEL" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" />
@@ -127,22 +127,22 @@
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Width="auto" Margin="8,0,0,0">
-                    <GroupBox x:Name="groupBox_message" Header="Message" HorizontalAlignment="Left" Margin="0" Width="400" Style="{DynamicResource MaterialDesignCardGroupBox}" RenderTransformOrigin="0, 0" Height="429">
+                <DockPanel Margin="8,0,0,64" LastChildFill="True" Width="408">
+                    <GroupBox DockPanel.Dock="Top" x:Name="groupBox_toneSettings" Header="Tone Settings" Style="{DynamicResource MaterialDesignCardGroupBox}" RenderTransformOrigin="0, 0" Margin="0,0,4,8">
+                        <StackPanel Orientation="Vertical">
+                            <CheckBox x:Name="chkEbsTones" Content="Include EBS Attention Tones" Margin="{DynamicResource StackPanel_DefaultCheckBoxMargin}" />
+                            <CheckBox x:Name="chkNwsTone" Content="Include NWS Attention Tone" Margin="{DynamicResource StackPanel_DefaultCheckBoxMargin}" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox DockPanel.Dock="Top" x:Name="groupBox_message" Header="Message" Style="{DynamicResource MaterialDesignCardGroupBox}" RenderTransformOrigin="0, 0" VerticalContentAlignment="Stretch" Margin="0,0,4,0">
                         <Grid Height="auto" VerticalAlignment="Top" Width="auto">
                             <TextBox x:Name="txtAnnouncement" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" TextWrapping="Wrap" Width="auto" TextChanged="textBox1_TextChanged" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Message" AcceptsReturn="True"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="groupBox_toneSettings" Header="Tone Settings" HorizontalAlignment="Left" Margin="0,8,0,0" Width="400" Style="{DynamicResource MaterialDesignCardGroupBox}" RenderTransformOrigin="0, 0" Height="104">
-                        <StackPanel Orientation="Vertical">
-                            <CheckBox x:Name="chkEbsTones" Content="Include EBS Attention Tones" Margin="4" />
-                            <CheckBox x:Name="chkNwsTone" Content="Include NWS Attention Tone" Margin="4" />
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
+                </DockPanel>
             </StackPanel>
         </Grid>
-        <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" CornerRadius="2" materialDesign:ShadowAssist.ShadowDepth="Depth5" ClipToBounds="False" Margin="2,2,2,0" Height="64">
+        <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" CornerRadius="2" materialDesign:ShadowAssist.ShadowDepth="Depth5" ClipToBounds="False" Margin="2,2,2,0" Height="64" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PopupBox StaysOpen="False">
                     <StackPanel>
@@ -160,43 +160,7 @@
         </materialDesign:ColorZone>
 
         <!--#region Dialogs-->
-        <!-- AppExit dialog -->
-        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="dialogHost_exitWithoutSaving">
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="8,16,8,4">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <materialDesign:PackIcon Kind="Warning" Width="32" Height="32" Margin="8,0,0,0"/>
-                        <StackPanel Margin="16,0,8,0">
-                            <TextBlock Text="Exit?" FontSize="18" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" Margin="0,6,0,8"/>
-                            <TextBlock Text="Are you sure you want to exit? Any unsaved changes will be lost." VerticalAlignment="Center" Margin="0,0,8,0" Width="256" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button x:Name="exitDialog_Ignore" Content="NO" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button x:Name="exitDialog_Confirm" Content="YES" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Click="exitDialog_Confirm_Click" />
-                    </StackPanel>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
-        <!-- AppSettings dialog-->
-        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="dialogHost_settings">
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="8,16,8,4">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <StackPanel Margin="16,0,8,0">
-                            <TextBlock Text="Settings" FontSize="18" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" Margin="0,4,0,8"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <CheckBox x:Name="setting_normalizeAudioOutput"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button x:Name="settingsDialog_Cancel" Content="Cancel" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button x:Name="settingsDialog_Confirm" Content="Done" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Click="exitDialog_Confirm_Click" />
-                    </StackPanel>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
+        
         <!--#endregion-->
 
     </Grid>
