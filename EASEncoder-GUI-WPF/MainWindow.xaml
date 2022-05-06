@@ -62,7 +62,7 @@
                     <GroupBox x:Name="groupBox_alertIdentifier" Header="Alert Identifier Configuration" HorizontalAlignment="Stretch" Height="auto" Margin="0" VerticalAlignment="Top" Width="auto" Style="{DynamicResource MaterialDesignCardGroupBox}">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
-                                <ComboBox x:Name="comboOriginator" Style="{StaticResource MaterialDesignFilledComboBox}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="283" materialDesign:HintAssist.Hint="Originator" SelectionChanged="comboOriginator_SelectionChanged" />
+                                <ComboBox x:Name="comboOriginator" Style="{StaticResource MaterialDesignFilledComboBox}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="283" materialDesign:HintAssist.Hint="Originator" SelectionChanged="comboOriginator_SelectionChanged"/>
                                 <TextBox x:Name="txtSender" Style="{StaticResource MaterialDesignFilledTextBox}" HorizontalAlignment="Left" Height="auto" Margin="16,0,0,0" TextWrapping="Wrap" Text="12345678" VerticalAlignment="Top" Width="150" materialDesign:HintAssist.Hint="Sender ID (8 chars)" MaxLength="8"/>
                             </StackPanel>
                             <ComboBox x:Name="comboCode" Style="{StaticResource MaterialDesignFilledComboBox}" HorizontalAlignment="Left" Margin="0,12,0,0" VerticalAlignment="Top" Width="283" materialDesign:HintAssist.Hint="Alert Code" RenderTransformOrigin="0.508,0.436" SelectionChanged="comboCode_SelectionChanged" />
@@ -136,7 +136,7 @@
                     </GroupBox>
                     <GroupBox DockPanel.Dock="Top" x:Name="groupBox_message" Header="Message" Style="{DynamicResource MaterialDesignCardGroupBox}" RenderTransformOrigin="0, 0" VerticalContentAlignment="Stretch" Margin="0,0,4,0">
                         <Grid Height="auto" VerticalAlignment="Top" Width="auto">
-                            <TextBox x:Name="txtAnnouncement" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" TextWrapping="Wrap" Width="auto" TextChanged="textBox1_TextChanged" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Message" AcceptsReturn="True"/>
+                            <TextBox x:Name="txtAnnouncement" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" TextWrapping="Wrap" Width="auto" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Message" AcceptsReturn="True"/>
                         </Grid>
                     </GroupBox>
                 </DockPanel>
@@ -160,7 +160,60 @@
         </materialDesign:ColorZone>
 
         <!--#region Dialogs-->
-        
+        <!-- AppExit dialog -->
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="dialogHost_exitWithoutSaving" Grid.ColumnSpan="2">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="8,16,8,4">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <materialDesign:PackIcon Kind="Warning" Width="32" Height="32" Margin="8,0,0,0"/>
+                        <StackPanel Margin="16,0,8,0">
+                            <TextBlock Text="Exit?" FontSize="18" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" Margin="0,6,0,8"/>
+                            <TextBlock Text="Are you sure you want to exit? Any unsaved changes will be lost." VerticalAlignment="Center" Margin="0,0,8,0" Width="256" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button x:Name="exitDialog_Ignore" Content="NO" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        <Button x:Name="exitDialog_Confirm" Content="YES" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Click="exitDialog_Confirm_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <!-- First Start dialog -->
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="dialogHost_firstStart" Grid.ColumnSpan="2">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="8,16,8,4">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <materialDesign:PackIcon Kind="Warning" Width="32" Height="32" Margin="8,0,0,0"/>
+                        <StackPanel Margin="16,0,8,0">
+                            <TextBlock Text="Warning" FontSize="18" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" Margin="0,6,0,8"/>
+                            <TextBlock Text="This application generates valid tones that are intended for TESTING PURPOSES ONLY (or for EAS scenarios). Broadcasting generated tones in any way can cause damages and possible legal liabilities." VerticalAlignment="Center" Margin="0,0,8,0" Width="256" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button x:Name="firstStart_close" Content="OK, I understand" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <!-- AppSettings dialog-->
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="dialogHost_settings" Grid.ColumnSpan="2">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="8,16,8,4">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <StackPanel Margin="16,0,8,0">
+                            <TextBlock Text="Settings" FontSize="18" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" Margin="0,4,0,8"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <!-- Settings go here -->
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button x:Name="settingsDialog_Cancel" Content="Cancel" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        <Button x:Name="settingsDialog_Confirm" Content="Done" Margin="4" Style="{StaticResource MaterialDesignFlatButton}" Click="exitDialog_Confirm_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
         <!--#endregion-->
 
     </Grid>

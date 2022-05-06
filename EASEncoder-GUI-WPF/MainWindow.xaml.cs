@@ -54,7 +54,7 @@ namespace EASEncoder_GUI_WPF
         /// <summary>
         /// Filter for SaveFileDialog / OpenFileDialog (EAS File Extension)
         /// </summary>
-        string EAS_FileDialogFilterString; //Assigned later
+        string EAS_FileDialogFilterString; // Assigned later
 
         SaveFileDialog saveAlertFileDialog = new SaveFileDialog();
         SaveFileDialog saveAudioOutputFileDialog = new SaveFileDialog();
@@ -63,11 +63,11 @@ namespace EASEncoder_GUI_WPF
         public MainWindow()
         {
             EAS_FileDialogFilterString = "EAS Encoder Document|*." + EAS_FileExtension;
-            saveAudioOutputFileDialog.Filter = "Lossless Audio File|*.wav";
+            saveAudioOutputFileDialog.Filter = "Uncompressed Audio File|*.wav";
 
             InitializeComponent();
-            //string[] alertCodes = MessageTypes.AlertCodes.OrderBy(x => x.Name).Select(x => x.Name).ToArray();
-            //string[] originators = MessageTypes.Originators.OrderBy(x => x.Name).Select(x => x.Name).ToArray();
+            // string[] alertCodes = MessageTypes.AlertCodes.OrderBy(x => x.Name).Select(x => x.Name).ToArray();
+            // string[] originators = MessageTypes.Originators.OrderBy(x => x.Name).Select(x => x.Name).ToArray();
             timer.Tick += Timer_Tick;
             timer.Interval = 500;
             timer.Enabled = false;
@@ -100,15 +100,15 @@ namespace EASEncoder_GUI_WPF
             preview_MediaElement.MediaEnded += Preview_MediaElement_MediaEnded;
             button_dismissPreview.Click += Button_dismissPreview_Click;
             appMenu_newAlert.Click += AppMenu_newAlert_Click;
-            InitializeAlertProject();
+            InitializeNewProject();
         }
 
         private void AppMenu_newAlert_Click(object sender, RoutedEventArgs e)
         {
-            InitializeAlertProject();
+            InitializeNewProject();
         }
 
-        void InitializeAlertProject()
+        void InitializeNewProject()
         {
             alertStart_TimePicker.SelectedTime = null;
             alertStart_DatePicker.SelectedDate = null;
@@ -182,11 +182,6 @@ namespace EASEncoder_GUI_WPF
             {
 
             }
-        }
-
-        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void switch_DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -311,11 +306,11 @@ namespace EASEncoder_GUI_WPF
             {
                 foreach (SAMERegion item in datagridRegions.SelectedItems)
                 {
-                    //DataGridCellInfo cellToRemove = cell;
-                    //datagridRegions.Items.Remove(cellToRemove);
+                    // DataGridCellInfo cellToRemove = cell;
+                    // datagridRegions.Items.Remove(cellToRemove);
                     Regions.Remove(item);
                 }
-                //datagridRegions.Items.Remove(datagridRegions.SelectedItem);
+                // datagridRegions.Items.Remove(datagridRegions.SelectedItem);
                 var bindingList = new BindingList<SAMERegion>(Regions);
                 var source = new BindingSource(bindingList, null);
                 datagridRegions.ItemsSource = source;
@@ -351,7 +346,7 @@ namespace EASEncoder_GUI_WPF
                 dialogHost_PreviewWindow.IsOpen = true;
                 preview_MediaElement.Source = new Uri(path);
                 timer.Enabled = true;
-                preview_MediaElement.LoadedBehavior = MediaState.Play; //Theoretically, this should make the MediaElement autoplay when it loads the file
+                preview_MediaElement.LoadedBehavior = MediaState.Play; // Theoretically, this should make the MediaElement autoplay when it loads the file
                 //preview_MediaElement.Play();
             }
             catch (Exception)
@@ -373,14 +368,14 @@ namespace EASEncoder_GUI_WPF
             }
         }
 
-        bool AreTimeRangesSelected()
-        {
-            if (((!(comboBox_durationInHours.SelectedIndex == -1)) || (!(comboBox_durationInMinutes.SelectedIndex == -1))) && (!(comboBox_durationInHours.SelectedIndex == -1)) || (!(comboBox_durationInMinutes.SelectedIndex == -1)))
-            {
-                return false;
-            }
-            else return true;
-        }
+        // bool AreTimeRangesSelected()
+        // {
+        //     if (((!(comboBox_durationInHours.SelectedIndex == -1)) || (!(comboBox_durationInMinutes.SelectedIndex == -1))) && (!(comboBox_durationInHours.SelectedIndex == -1)) || (!(comboBox_durationInMinutes.SelectedIndex == -1)))
+        //     {
+        //         return false;
+        //     }
+        //     else return true;
+        // }
 
         void SyncPreviewPlaybackVolume()
         {
